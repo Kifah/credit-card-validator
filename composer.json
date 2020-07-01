@@ -1,21 +1,26 @@
 {
-    "name": "kifahabbad/trycomposer",
-    "require-dev": {
-        "phpunit/phpunit": "^9.2"
-    },
-    "authors": [
-        {
-            "name": "kifahabbad",
-            "email": "kifah@web.de"
-        }
-    ],
-    "autoload": {
-        "classmap": [
-            "src/"
-        ]
-    },
-    "require": {},
-    "scripts": {
-        "test": "vendor/bin/phpunit test"
+  "config": {
+    "platform": {
+      "php": "7.4.*"
     }
+  },
+  "name": "kifahabbad/trycomposer",
+  "require-dev": {
+    "phpunit/phpunit": "^9.2"
+  },
+  "authors": [
+    {
+      "name": "kifahabbad",
+      "email": "kifah@web.de"
+    }
+  ],
+  "autoload": {
+    "classmap": [
+      "src/"
+    ]
+  },
+  "require": {},
+  "scripts": {
+    "test": "vendor/bin/phpunit test"
+  }
 }
