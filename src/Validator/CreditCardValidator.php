@@ -10,6 +10,10 @@ use DateTime;
 class CreditCardValidator implements Validator
 {
 
+    /**
+     * @param array $params
+     * @return bool
+     */
     public function validate(array $params): bool
     {
         $creditCardNumber = $params['number'];
