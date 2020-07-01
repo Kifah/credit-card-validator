@@ -3,13 +3,12 @@ name: PHP Composer
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
+    with:
+      php-version: '7.4'
 
     steps:
     - uses: actions/checkout@v2
@@ -27,11 +26,13 @@ jobs:
           ${{ runner.os }}-php-
 
     - name: Install dependencies
+      id: composer-install
       if: steps.composer-cache.outputs.cache-hit != 'true'
-      run: composer install --prefer-dist --no-progress --no-suggest
+      run: composer install --prefer-dist --no-progress --no-suggest --dev
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md
 
     - name: Run test suite
+      if: steps.composer-cache.outputs.cache-hit != 'true'
       run: composer run-script test
