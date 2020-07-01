@@ -23,7 +23,7 @@ class CreditCardValidator implements Validator
         $isYearValid = $this->yearIsValid($year);
         $isYearAndMonthValid = $this->yearAndMonthValid($year, $month);
         $cardIsValid = $this->cardNumberIsValid($creditCardNumber);
-        if ($isMonthValid && $isYearValid && $isYearAndMonthValid && $cardIsValid) return true;
+        if ($this->allElementsAreValid($isMonthValid, $isYearValid, $isYearAndMonthValid, $cardIsValid)) return true;
         return false;
     }
 
@@ -94,6 +94,18 @@ class CreditCardValidator implements Validator
         $LeftOfModOverTen = 10 - ($allNumbers % 10);
         $lastDigit = (int)substr($pan, -1);
         return ($lastDigit === $LeftOfModOverTen);
+    }
+
+    /**
+     * @param bool $isMonthValid
+     * @param bool $isYearValid
+     * @param bool $isYearAndMonthValid
+     * @param bool $cardIsValid
+     * @return bool
+     */
+    private function allElementsAreValid(bool $isMonthValid, bool $isYearValid, bool $isYearAndMonthValid, bool $cardIsValid): bool
+    {
+        return $isMonthValid && $isYearValid && $isYearAndMonthValid && $cardIsValid;
     }
 
 }
