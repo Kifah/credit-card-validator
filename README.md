@@ -1,3 +1,5 @@
+![CI](https://github.com/Kifah/credit-card-validator/workflows/CI/badge.svg)
+
 This is a simple and self written Credit Card Validator, written in php.
 
 ### Perquisites
