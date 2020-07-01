@@ -18,7 +18,8 @@ class CreditCardValidator implements Validator
         $isMonthValid = $this->monthIsValid($month);
         $isYearValid = $this->yearIsValid($year);
         $isYearAndMonthValid = $this->yearAndMonthValid($year, $month);
-        if ($isMonthValid && $isYearValid && $isYearAndMonthValid) return true;
+        $cardIsValid = $this->cardNumberIsValid($creditCardNumber);
+        if ($isMonthValid && $isYearValid && $isYearAndMonthValid && $cardIsValid) return true;
         return false;
     }
 
@@ -62,6 +63,33 @@ class CreditCardValidator implements Validator
             return false;
         }
         return true;
+    }
+
+    /**
+     * @param string $pan
+     * @return bool
+     */
+    private function cardNumberIsValid(string $pan): bool
+    {
+        $withoutLastDigit = substr($pan, 0, -1);
+        $digitsArray = str_split($withoutLastDigit);
+        $newPosition = 1;
+        $allNumbers = 0;
+        for ($i = count($digitsArray) - 1; $i >= 0; $i--) {
+            if ($newPosition % 2 !== 0) {
+                $newElement = $digitsArray[$i] * 2;
+                if ($newElement > 9) {
+                    $newElement = $newElement - 9;
+                }
+            } else {
+                $newElement = $digitsArray[$i];
+            }
+            $newPosition++;
+            $allNumbers += $newElement;
+        }
+        $LeftOfModOverTen = 10 - ($allNumbers % 10);
+        $lastDigit = (int)substr($pan, -1);
+        return ($lastDigit === $LeftOfModOverTen);
     }
 
 }
