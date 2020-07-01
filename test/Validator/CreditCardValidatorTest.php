@@ -27,14 +27,14 @@ class CreditCardValidatorTest extends TestCase
         $formattedYearInFuture=(int)$oneYearInFuture->format('Y');
         return [
             'monthOver12' => [
-                ['number' => '4716540558964740', 'month' => 13, 'year' => 2022],
+                ['number' => '4716540558964740', 'month' => 13, 'year' => $formattedYearInFuture],
                 false
             ],
             'monthWithinRange' => [
-                ['number' => '4716540558964740', 'month' => 12, 'year' => 2022],
+                ['number' => '4716540558964740', 'month' => 12, 'year' => $formattedYearInFuture],
                 true
             ], 'monthBelowOne' => [
-                ['number' => '4716540558964740', 'month' => 0, 'year' => 2022],
+                ['number' => '4716540558964740', 'month' => 0, 'year' => $formattedYearInFuture],
                 false
             ]
             , 'yearInvalidInPast' => [
