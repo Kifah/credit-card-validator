@@ -14,5 +14,8 @@
             "src/"
         ]
     },
-    "require": {}
+    "require": {},
+    "scripts": {
+        "test": "vendor/bin/phpunit test"
+    }
 }
