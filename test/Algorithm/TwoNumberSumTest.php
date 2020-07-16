@@ -9,10 +9,11 @@ class TwoNumberSumTest extends TestCase
 
     /**
      * @dataProvider InputOutputProvider
-     * @param array $
-     * @param bool $result
+     * @param array $inputArray
+     * @param int $targetSum
+     * @param array $expectedOutputArray
      */
-    public function testValidate(array $inputArray, int $targetSum, array $expectedOutputArray)
+    public function testRun(array $inputArray, int $targetSum, array $expectedOutputArray)
     {
         $twoNumberSum=TwoNumberSum::run($inputArray,$targetSum);
         $this->assertEquals($twoNumberSum, $expectedOutputArray);
