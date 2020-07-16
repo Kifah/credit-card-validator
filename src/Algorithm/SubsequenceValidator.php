@@ -13,7 +13,7 @@ class SubsequenceValidator
      */
     public static function validate(array $inputArray, array $subsequence): bool
     {
-        if (sizeof($subsequence) > sizeof($inputArray)) {
+        if (self::subArrayIsLargerThanInputArray($subsequence, $inputArray)) {
             return false;
         }
         $resultingArray = [];
@@ -22,12 +22,32 @@ class SubsequenceValidator
                 if ($subsequence[$i] === $inputArray[$j]) {
                     $resultingArray[] = $inputArray[$j];
                 }
-                if (sizeof($resultingArray) === sizeof($subsequence)) {
+                if (self::subArrayContentComplete($resultingArray, $subsequence)) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+    /**
+     * @param array $subsequence
+     * @param array $inputArray
+     * @return bool
+     */
+    private static function subArrayIsLargerThanInputArray(array $subsequence, array $inputArray): bool
+    {
+        return sizeof($subsequence) > sizeof($inputArray);
+    }
+
+    /**
+     * @param array $resultingArray
+     * @param array $subsequence
+     * @return bool
+     */
+    private static function subArrayContentComplete(array $resultingArray, array $subsequence): bool
+    {
+        return sizeof($resultingArray) === sizeof($subsequence);
     }
 
 }
